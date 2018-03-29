@@ -17,7 +17,7 @@
             <file leaf-file-name="PartA.py" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/../../PROJECT A - Not OOP/PartA.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="396">
+                  <state relative-caret-position="6435">
                     <caret line="195" column="28" lean-forward="false" selection-start-line="195" selection-start-column="28" selection-end-line="195" selection-end-column="28" />
                     <folding />
                   </state>
@@ -44,8 +44,8 @@
       <file leaf-file-name="Main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="13" column="80" lean-forward="false" selection-start-line="13" selection-start-column="80" selection-end-line="13" selection-end-column="80" />
+            <state relative-caret-position="438">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -53,14 +53,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Board.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Board.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/classes/Board.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="104" column="45" lean-forward="true" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+            <state relative-caret-position="334">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding>
                 <element signature="e#439#915#0" expanded="false" />
                 <element signature="e#952#1108#0" expanded="false" />
+                <element signature="e#1166#1808#0" expanded="false" />
                 <element signature="e#2408#2608#0" expanded="false" />
                 <element signature="e#3154#3208#0" expanded="false" />
                 <element signature="e#3277#3809#0" expanded="false" />
@@ -69,15 +70,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Piece.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Piece.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/classes/Piece.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state relative-caret-position="1749">
+              <caret line="68" column="24" lean-forward="false" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
               <folding>
                 <element signature="e#1193#1359#0" expanded="false" />
-                <element signature="e#2273#2834#0" expanded="false" />
-                <element signature="e#2898#2952#0" expanded="false" />
+                <element signature="e#2279#2840#0" expanded="false" />
+                <element signature="e#2904#2958#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -106,12 +107,12 @@
     <findStrings>
       <find>make</find>
       <find>pieces</find>
-      <find>print</find>
       <find>print(sel</find>
       <find>self.update(&quot;@&quot;)</find>
       <find>update</find>
       <find>remove</find>
       <find>remove_p</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,9 +123,9 @@
       <list>
         <option value="$PROJECT_DIR$/classes/Engine.py" />
         <option value="$PROJECT_DIR$/classes/Main.py" />
+        <option value="$PROJECT_DIR$/classes/Piece.py" />
         <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/classes/Board.py" />
-        <option value="$PROJECT_DIR$/classes/Piece.py" />
       </list>
     </option>
   </component>
@@ -272,6 +273,7 @@
           <folding>
             <element signature="e#439#915#0" expanded="false" />
             <element signature="e#952#1108#0" expanded="false" />
+            <element signature="e#1166#1808#0" expanded="false" />
             <element signature="e#2408#2608#0" expanded="false" />
             <element signature="e#3154#3208#0" expanded="false" />
             <element signature="e#3277#3809#0" expanded="false" />
@@ -285,8 +287,8 @@
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="13" />
           <folding>
             <element signature="e#1193#1359#0" expanded="false" />
-            <element signature="e#2273#2834#0" expanded="false" />
-            <element signature="e#2898#2952#0" expanded="false" />
+            <element signature="e#2279#2840#0" expanded="false" />
+            <element signature="e#2904#2958#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -325,46 +327,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../PROJECT A - Not OOP/PartA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="195" column="28" lean-forward="false" selection-start-line="195" selection-start-column="28" selection-end-line="195" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="13" column="80" lean-forward="false" selection-start-line="13" selection-start-column="80" selection-end-line="13" selection-end-column="80" />
+        <state relative-caret-position="438">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes/Board.py">
+    <entry file="file://$PROJECT_DIR$/classes/Piece.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="104" column="45" lean-forward="true" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+        <state relative-caret-position="1749">
+          <caret line="68" column="24" lean-forward="false" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
           <folding>
-            <element signature="e#439#915#0" expanded="false" />
-            <element signature="e#952#1108#0" expanded="false" />
-            <element signature="e#2408#2608#0" expanded="false" />
-            <element signature="e#3154#3208#0" expanded="false" />
-            <element signature="e#3277#3809#0" expanded="false" />
+            <element signature="e#1193#1359#0" expanded="false" />
+            <element signature="e#2279#2840#0" expanded="false" />
+            <element signature="e#2904#2958#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes/Piece.py">
+    <entry file="file://$PROJECT_DIR$/../../PROJECT A - Not OOP/PartA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state relative-caret-position="6435">
+          <caret line="195" column="28" lean-forward="false" selection-start-line="195" selection-start-column="28" selection-end-line="195" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/Board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="e#1193#1359#0" expanded="false" />
-            <element signature="e#2273#2834#0" expanded="false" />
-            <element signature="e#2898#2952#0" expanded="false" />
+            <element signature="e#439#915#0" expanded="false" />
+            <element signature="e#952#1108#0" expanded="false" />
+            <element signature="e#1166#1808#0" expanded="false" />
+            <element signature="e#2408#2608#0" expanded="false" />
+            <element signature="e#3154#3208#0" expanded="false" />
+            <element signature="e#3277#3809#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -146,6 +146,6 @@ class Board:
                 for i in range(len(move_order) - 1):
                     self.move_piece(move_order[i], move_order[i+1])
                     # self.update("@")
-                    print(move_order)
+                    #print(move_order)
 
 

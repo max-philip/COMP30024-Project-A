@@ -58,19 +58,19 @@ class Piece:
         piece_type = positions[pos].type
         kill_type = self.get_kill_type(piece_type)
 
-        print(sol_space)
+        # print(sol_space)
         # for i in positions:
         #     print(str(i) + str(positions[i].type))
 
         for axis in sol_space[pos]:
             to_delete = True
             for loc in axis:
-                print(str(loc) + " " + str(positions[loc].type) + " " + str(kill_type))
-                if not (positions[loc].type == kill_type):
+                # print(str(loc) + " " + str(positions[loc].type) + " " + str(kill_type))
+                if (not positions[loc].type == kill_type):
                     to_delete = False
 
             if to_delete:
-                print("AXIS: "+str(axis))
+                # print("AXIS: "+str(axis))
                 return to_delete
             else:
                 continue
