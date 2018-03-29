@@ -14,11 +14,13 @@ class Piece:
         self.x = x
         self.y = y
 
-    def move(self, new_pos):
+    def move(self, new_pos, board):
         start = (self.x, self.y)
         self.x = new_pos[0]
         self.y = new_pos[1]
-        print(str(start) + "->" + str(new_pos))
+        if not self.type == self.EMPTY:
+            print(str(start) + "->" + str(new_pos))
+        board.update("@")
 
     def valid_x(self, pos, positions):
         x_moves = [(-1, 0), (1, 0)]
@@ -26,7 +28,7 @@ class Piece:
 
         for move in x_moves:
             new_pos = (pos[0] + move[0], pos[1] + move[1])
-            if (new_pos in positions) and (positions[new_pos] != self.CORNER):
+            if (new_pos in positions) and (positions[new_pos].type != self.CORNER):
                 solutions.append(new_pos)
 
         return solutions
@@ -37,7 +39,7 @@ class Piece:
 
         for move in y_moves:
             new_pos = (pos[0] + move[0], pos[1] + move[1])
-            if (new_pos in positions) and (positions[new_pos] != self.CORNER):
+            if (new_pos in positions) and (positions[new_pos].type != self.CORNER):
                 solutions.append(new_pos)
 
         return solutions
@@ -56,18 +58,22 @@ class Piece:
         piece_type = positions[pos].type
         kill_type = self.get_kill_type(piece_type)
 
-        #print(sol_space)
+        print(sol_space)
+        # for i in positions:
+        #     print(str(i) + str(positions[i].type))
 
         for axis in sol_space[pos]:
             to_delete = True
             for loc in axis:
+                print(str(loc) + " " + str(positions[loc].type) + " " + str(kill_type))
                 if not (positions[loc].type == kill_type):
                     to_delete = False
 
-                if to_delete:
-                    return to_delete
-                else:
-                    continue
+            if to_delete:
+                print("AXIS: "+str(axis))
+                return to_delete
+            else:
+                continue
 
         return False
 

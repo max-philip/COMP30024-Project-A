@@ -13,6 +13,8 @@ while my_board.pieces["@"]:
     enemies = my_board.positions[curr_black].find_closest_enemies(my_board.pieces)
     my_board.get_move_order(enemies, my_board.black_solution_space[curr_black][0])
     my_board.print_board()
+    my_board.update("@")
+    my_board.print_board()
 
 
 

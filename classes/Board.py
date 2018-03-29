@@ -50,20 +50,20 @@ class Board:
         end_piece = self.positions[final_pos]
         piece_type = piece.type
 
-        if self.positions[final_pos] == self.EMPTY:
-            piece.move(final_pos)
-            end_piece.move(start_pos)
+        if self.positions[final_pos].type == self.EMPTY:
+            piece.move(final_pos, self)
+            end_piece.move(start_pos, self)
 
-        self.positions[final_pos] = piece
-        self.positions[start_pos] = end_piece
+            self.positions[final_pos] = piece
+            self.positions[start_pos] = end_piece
 
-        #print(start_pos)
-        #print(self.pieces[piece_type])
-        self.pieces[piece_type].remove(start_pos)
-        self.pieces[piece_type].append(final_pos)
+            #print(start_pos)
+            #print(self.pieces[piece_type])
+            self.pieces[piece_type].remove(start_pos)
+            self.pieces[piece_type].append(final_pos)
 
-        self.pieces[self.EMPTY].remove(final_pos)
-        self.pieces[self.EMPTY].append(start_pos)
+            self.pieces[self.EMPTY].remove(final_pos)
+            self.pieces[self.EMPTY].append(start_pos)
 
     def update(self, move_type):
 
@@ -145,7 +145,7 @@ class Board:
             else:
                 for i in range(len(move_order) - 1):
                     self.move_piece(move_order[i], move_order[i+1])
-                    self.update("@")
+                    # self.update("@")
                     print(move_order)
 
 
