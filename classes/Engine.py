@@ -1,4 +1,5 @@
 from classes.Board import Board
+from classes.Piece import Piece
 
 
 class Engine:
@@ -31,9 +32,9 @@ class Engine:
         for xy in positions.keys():
             moves = positions[xy].get_moves(xy, positions)
             if positions[xy].type == self.WHITE:
-                white_count += len(moves)
+                white_count += len(moves[0]) + len(moves[1])
             if positions[xy].type == self.BLACK:
-                black_count += len(moves)
+                black_count += len(moves[0]) + len(moves[1])
 
         print(white_count)
         print(black_count)
@@ -41,7 +42,7 @@ class Engine:
     def massacre(self, kill_type):
         while self.game_board.pieces[kill_type]:
             self.game_board.make_solution_space(kill_type)
-            curr_p = self.game_board.pieces[kill_type][0]
+            curr_p = self.game_board.pieces[kill_type][-1]
             enemies = self.game_board.positions[curr_p].find_closest_enemies(self.game_board.pieces)
             surrounding_x = self.game_board.positions[curr_p].valid_x(curr_p, self.game_board.positions)
             surrounding_y = self.game_board.positions[curr_p].valid_y(curr_p, self.game_board.positions)
@@ -52,22 +53,23 @@ class Engine:
                     x_manhat = 0
                     for enemy in enemies:
                         for sol in self.game_board.black_solution_space[curr_p][0]:
-                            x_manhat += Board.manhattan_dist(enemy, sol)
+                            x_manhat += Piece.manhattan_dist(enemy, sol)
 
                     y_manhat = 0
                     for enemy in enemies:
                         for sol in self.game_board.black_solution_space[curr_p][-1]:
-                            y_manhat += Board.manhattan_dist(enemy, sol)
+                            y_manhat += Piece.manhattan_dist(enemy, sol)
 
                     if y_manhat > x_manhat:
                         solution_index = 0
                     else:
                         solution_index = -1
             else:
-                self.game_board.pieces[self.BLACK].append(self.game_board.pieces[self.BLACK].pop(0))
+                self.game_board.pieces[self.BLACK].append(self.game_board.pieces[self.BLACK].pop())
 
             self.game_board.get_move_order(enemies, self.game_board.black_solution_space[curr_p][solution_index])
             self.game_board.update(self.BLACK)
+            self.game_board.print_board()
 
     def check_surrounding_same_type(self, curr_p, surrounding_x, surrounding_y):
         has_same_neighbour = False

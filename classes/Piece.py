@@ -18,37 +18,80 @@ class Piece:
         start = (self.x, self.y)
         self.x = new_pos[0]
         self.y = new_pos[1]
-        if not self.type == self.EMPTY:
+        if not self.type == Piece.EMPTY:
             print(str(start) + "->" + str(new_pos))
-        board.update(self.BLACK)
+        board.update(Piece.BLACK)
+        # board.print_board()
+
+    def surrounded(self, pos, positions, kill_type):
+        right = (pos[0]+1, pos[1])
+        left = (pos[0]-1, pos[0])
+        up = (pos[0], pos[1]-1)
+        down = (pos[0], pos[1]+1)
+
+        right_surr = self.check_kill_space(right, positions, kill_type)
+        left_surr = self.check_kill_space(left, positions, kill_type)
+        up_surr = self.check_kill_space(up, positions, kill_type)
+        down_surr = self.check_kill_space(down, positions, kill_type)
+
+        if (right_surr and left_surr) or (up_surr and down_surr):
+            return True
+
+    def check_kill_space(self, new_pos, positions, kill_type):
+        is_kill = False
+
+        if not new_pos in positions:
+            is_kill = True
+        elif (positions[new_pos].type == kill_type) or (positions[new_pos] == Piece.CORNER):
+            is_kill = True
+
+        return is_kill
 
     def valid_x(self, pos, positions):
         x_moves = [(-1, 0), (1, 0)]
-        solutions = []
 
-        for move in x_moves:
-            new_pos = (pos[0] + move[0], pos[1] + move[1])
-            if (new_pos in positions) and (positions[new_pos].type != self.CORNER):
-                solutions.append(new_pos)
+        move1 = (pos[0] + x_moves[0][0], pos[1] + x_moves[0][1])
+        move2 = (pos[0] + x_moves[1][0], pos[1] + x_moves[1][1])
 
-        return solutions
+        if (move1 not in positions) or (move2 not in positions):
+            return []
+
+        if positions[move1].type == Piece.CORNER:
+            if move2 in positions:
+                return [move2]
+
+        if positions[move2].type == Piece.CORNER:
+            if move1 in positions:
+                return [move1]
+
+        if (move1 in positions) and (move2 in positions):
+            return [move1, move2]
 
     def valid_y(self, pos, positions):
         y_moves = [(0, -1), (0, 1)]
-        solutions = []
 
-        for move in y_moves:
-            new_pos = (pos[0] + move[0], pos[1] + move[1])
-            if (new_pos in positions) and (positions[new_pos].type != self.CORNER):
-                solutions.append(new_pos)
+        move1 = (pos[0] + y_moves[0][0], pos[1] + y_moves[0][1])
+        move2 = (pos[0] + y_moves[1][0], pos[1] + y_moves[1][1])
 
-        return solutions
+        if (move1 not in positions) or (move2 not in positions):
+            return []
+
+        if positions[move1].type == Piece.CORNER:
+            if move2 in positions:
+                return [move2]
+
+        if positions[move2].type == Piece.CORNER:
+            if move1 in positions:
+                return [move1]
+
+        if move1 in positions and move2 in positions:
+            return [move1, move2]
 
     def get_kill_type(self):
-        if self.type == self.WHITE:
-            return self.BLACK
-        elif self.type == self.BLACK:
-            return self.WHITE
+        if self.type == Piece.WHITE:
+            return Piece.BLACK
+        elif self.type == Piece.BLACK:
+            return Piece.WHITE
         else:
             return False
 
@@ -56,10 +99,24 @@ class Piece:
 
         pos = (self.x, self.y)
 
+        # print()
+        # print(pos)
+        # print(sol_space[pos])
+
         for axis in sol_space[pos]:
+            # print("AXIS " + str(axis))
             to_delete = True
+
+            # if axis == [] and self.next_to_corner(positions):
+            #     to_delete = False
+
             for loc in axis:
+                # print("LOC: " + str(loc))
                 if not positions[loc].type == kill_type:
+                    # print(loc)
+                    to_delete = False
+
+                if not loc and self.next_to_corner(positions):
                     to_delete = False
 
             if to_delete:
@@ -69,11 +126,24 @@ class Piece:
 
         return False
 
+    def next_to_corner(self, positions):
+        pos = (self.x, self.y)
+
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+        for move in directions:
+            new_pos = pos[0] + move[0], pos[1] + move[1]
+            if new_pos in positions:
+                if positions[new_pos].type == Piece.CORNER:
+                    return True
+
     def check_free(self, new_pos, positions):
-        return (new_pos in positions) and (positions[new_pos].type == self.EMPTY)
+        return (new_pos in positions) and (positions[new_pos].type == Piece.EMPTY)
 
     def get_moves(self, pos, positions):
         valid_moves = []
+
+        bad_moves = []
 
         movements = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
@@ -83,23 +153,26 @@ class Piece:
             new_x = pos[0] + a
             new_y = pos[1] + b
 
-            new_p = (new_x, new_y)
+            new_pos = (new_x, new_y)
 
-            if self.check_free(new_p, positions):
-                valid_moves.append(new_p)
-            elif new_p in positions:
-                new_p = (new_p[0] + a, new_p[1] + b)
-                if self.check_free(new_p, positions):
-                    valid_moves.append(new_p)
+            if self.check_free(new_pos, positions):
+                if not self.surrounded(new_pos, positions, Piece.BLACK):
+                    valid_moves.append(new_pos)
+                else:
+                    bad_moves.append(new_pos)
+                    break
+            elif new_pos in positions:
+                new_pos = (new_pos[0] + a, new_pos[1] + b)
+                if self.check_free(new_pos, positions):
+                    valid_moves.append(new_pos)
 
-        return valid_moves
+        return valid_moves, bad_moves
 
     @staticmethod
     def manhattan_dist(start, end):
         return abs(start[0] - end[0]) + abs(start[1] - end[1])
 
     def find_closest_enemies(self, pieces):
-        piece_type = self.type
         pos = (self.x, self.y)
         kill_type = self.get_kill_type()
 
