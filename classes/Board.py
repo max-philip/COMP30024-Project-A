@@ -17,39 +17,53 @@ class Board:
 
     black_solution_space = {}
     white_solution_space = {}
+    #empty_solution_space = {}
 
     def __init__(self):
         self.positions, self.pieces, self.type = self.populate_dict()
-        self.make_solution_space(self.BLACK)
+        self.black_solution_space = self.make_solution_space(self.BLACK)
+        self.white_solution_space = self.make_solution_space(self.WHITE)
+        #self.empty_solution_space = self.make_solution_space(self.EMPTY)
 
+    # Takes in raw input of board and fills positions and pieces dictionaries
     def populate_dict(self):
+
+        # Initialise dicts
         positions = {}
         pieces = {}
+
+        # Positions dictionary stores positions as keys and pieces as values
         for i in range(self.MAX_LEN):
             row = input().split(" ")
             for j in range(self.MAX_LEN):
                 curr_piece = Piece(row[j], j, i)
                 positions[(j, i)] = curr_piece
 
+                # Pieces dictionary stores positions for each piece type
                 if row[j] in pieces:
                     pieces[row[j]].append((j, i))
                 else:
                     pieces[row[j]] = [(j, i)]
 
+        # Gets the type of game - in this case either Moves or Massacre
         game_type = input()
         return positions, pieces, game_type
 
+    # Prints out the current board
     def print_board(self):
         for i in range(self.MAX_LEN):
             for j in range(self.MAX_LEN):
                 print(self.positions[(j, i)].type + " ", end='')
             print()
 
+    # Moves a piece from a starting position to a final one
     def move_piece(self, start_pos, final_pos):
         piece = self.positions[start_pos]
         end_piece = self.positions[final_pos]
         piece_type = piece.type
 
+        # Only makes the move if the final position is empty. Updates both the
+        # positions and pieces dictionaries.
         if self.positions[final_pos].type == self.EMPTY:
             piece.move(final_pos, self)
             end_piece.move(start_pos, self)
@@ -57,8 +71,6 @@ class Board:
             self.positions[final_pos] = piece
             self.positions[start_pos] = end_piece
 
-            #print(start_pos)
-            #print(self.pieces[piece_type])
             self.pieces[piece_type].remove(start_pos)
             self.pieces[piece_type].append(final_pos)
 
@@ -66,8 +78,6 @@ class Board:
             self.pieces[self.EMPTY].append(start_pos)
 
     def update(self, move_type):
-
-        pos_copy = self.positions
 
         if move_type == self.WHITE:
             kill_type = self.BLACK
@@ -78,9 +88,7 @@ class Board:
 
         for pos in self.positions.keys():
             piece = self.positions[pos]
-            if (pos in self.pieces[move_type]) and (piece.check_to_delete(pos_copy, sols)):
-                # print("REMOVE")
-                # print(pos)
+            if (pos in self.pieces[move_type]) and (piece.check_to_delete(self.positions, sols, piece.get_kill_type())):
                 self.remove_piece(pos)
 
     def remove_piece(self, pos):
@@ -102,7 +110,7 @@ class Board:
             sol_space[sol].append(self.positions[sol].valid_x(sol, self.positions))
             sol_space[sol].append(self.positions[sol].valid_y(sol, self.positions))
 
-        self.black_solution_space = sol_space
+        return sol_space
 
     @staticmethod
     def manhattan_dist(start, end):
@@ -118,8 +126,6 @@ class Board:
         p_queue = []
 
         frontier = self.positions[curr_pos].get_moves(curr_pos, self.positions)
-
-        #print(frontier)
 
         for node in frontier:
             if node not in visited:
@@ -147,5 +153,3 @@ class Board:
                     self.move_piece(move_order[i], move_order[i+1])
                     # self.update("@")
                     #print(move_order)
-
-

@@ -20,7 +20,7 @@ class Piece:
         self.y = new_pos[1]
         if not self.type == self.EMPTY:
             print(str(start) + "->" + str(new_pos))
-        board.update("@")
+        board.update(self.BLACK)
 
     def valid_x(self, pos, positions):
         x_moves = [(-1, 0), (1, 0)]
@@ -44,33 +44,25 @@ class Piece:
 
         return solutions
 
-    def get_kill_type(self, piece_type):
-        if piece_type == self.WHITE:
+    def get_kill_type(self):
+        if self.type == self.WHITE:
             return self.BLACK
-        elif piece_type == self.BLACK:
+        elif self.type == self.BLACK:
             return self.WHITE
         else:
             return False
 
-    def check_to_delete(self, positions, sol_space):
+    def check_to_delete(self, positions, sol_space, kill_type):
 
         pos = (self.x, self.y)
-        piece_type = positions[pos].type
-        kill_type = self.get_kill_type(piece_type)
-
-        # print(sol_space)
-        # for i in positions:
-        #     print(str(i) + str(positions[i].type))
 
         for axis in sol_space[pos]:
             to_delete = True
             for loc in axis:
-                # print(str(loc) + " " + str(positions[loc].type) + " " + str(kill_type))
-                if (not positions[loc].type == kill_type):
+                if not positions[loc].type == kill_type:
                     to_delete = False
 
             if to_delete:
-                # print("AXIS: "+str(axis))
                 return to_delete
             else:
                 continue
@@ -109,7 +101,7 @@ class Piece:
     def find_closest_enemies(self, pieces):
         piece_type = self.type
         pos = (self.x, self.y)
-        kill_type = self.get_kill_type(piece_type)
+        kill_type = self.get_kill_type()
 
         closest = []
 
@@ -119,7 +111,10 @@ class Piece:
 
         closest.sort()
 
-        return [closest[0][1], closest[1][1]]
+        if len(closest) == 1:
+            return [closest[0][1]]
+        else:
+            return [closest[0][1], closest[1][1]]
 
 
 
