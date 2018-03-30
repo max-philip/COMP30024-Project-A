@@ -3,8 +3,8 @@ from classes.Piece import Piece
 
 class Board:
 
+    # Maximum size of the board
     MAX_LEN = 8
-    PIECE_TYPES = 4
 
     positions = {}
     pieces = {}
@@ -106,7 +106,7 @@ class Board:
                 for pos in self.pieces[piece]:
                     sol_space[pos] = []
 
-        # 
+        #
         for sol in sol_space:
             if self.positions[sol].valid_x(sol, self.positions):
                 sol_space[sol].append(self.positions[sol].valid_x(sol, self.positions))

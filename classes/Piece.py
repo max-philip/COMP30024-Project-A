@@ -160,7 +160,7 @@ class Piece:
                     valid_moves.append(new_pos)
                 else:
                     bad_moves.append(new_pos)
-                    break
+
             elif new_pos in positions:
                 new_pos = (new_pos[0] + a, new_pos[1] + b)
                 if self.check_free(new_pos, positions):
